@@ -130,3 +130,4 @@ function pcWinChange(){
     }
     resultBox.setAttribute("style", "background-color: rgb(236, 72, 72);");
 }
+
