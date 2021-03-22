@@ -1,5 +1,6 @@
 let playerScore = 0
 let Pcscore = 0
+let rounds = 1
 
 rockImg.onclick = chooseRock
 paperImg.onclick= choosePaper
@@ -9,6 +10,7 @@ const playerOrpc = document.querySelector('#playerOrpc')
 const score = document.querySelector('#score')
 const winnerIMG = document.querySelector('#winnerIMG')
 const resultBox = document.querySelector('.result h3')
+const roundCount = document.querySelector('#roundCount')
 
 function chooseRock(){
     playerSelect = 'rock'
@@ -35,7 +37,7 @@ function playRound(){
     computerPlay()
     console.log('PC: ' + computerSelect)
 
-    if(playerScore + Pcscore == 5){
+    if(rounds == 5){
         score.textContent = `score: ${playerScore} - ${Pcscore}`
             if(playerScore > Pcscore){
                 playerWinChange()
@@ -46,6 +48,9 @@ function playRound(){
             }
             playerScore = 0
             Pcscore = 0
+            rounds = 0
+            roundCount.textContent = `round: ${rounds}`
+
     
     }
 
@@ -55,6 +60,8 @@ function playRound(){
         playerOrpc.textContent = 'winner of this round: No one'
         winnerIMG.setAttribute('src', 'znemo.jpg')
         resultBox.setAttribute("style", "background-color: #add8e6;");
+        rounds++
+        roundCount.textContent = `round: ${rounds}`
 
     }
 
@@ -70,9 +77,11 @@ function playRound(){
         pcWinChange()
     }
     score.textContent = `score: ${playerScore} - ${Pcscore}`
+    roundCount.textContent = `round: ${rounds}`
 
     console.log('player score: ' + playerScore)
     console.log('pc score: ' + Pcscore)
+    console.log(rounds)
 
 }
 
@@ -92,7 +101,7 @@ function computerPlay(){
 
 function playerWinChange(){
 
-   if (playerScore+Pcscore == 5){
+   if (rounds == 5){
         winnerIMG.setAttribute('src', 'zwinmagneto.jpg')
         playerOrpc.textContent = 'Congrats! You won the game'
    }
@@ -101,13 +110,14 @@ function playerWinChange(){
         winnerIMG.setAttribute('src', 'zdavid.png')
         playerOrpc.textContent = 'winner of this round: You'
         console.log(`player wins! ${playerSelect} beats ${computerSelect}!`)
+        rounds++
    }
    resultBox.setAttribute("style", "background-color: #a2f3a2;");
 }
 
 function pcWinChange(){
 
-    if (playerScore+Pcscore == 5){
+    if (rounds == 5){
         winnerIMG.setAttribute('src', 'zvisionwin.jpg')
         playerOrpc.textContent = 'Congrats! A fkin computer beat you'
     }
@@ -116,6 +126,7 @@ function pcWinChange(){
         winnerIMG.setAttribute('src', 'zvision.jpg')
         playerOrpc.textContent = 'winner of this round: PC'
         console.log(`computer wins! ${computerSelect} beats ${playerSelect}!`)
+        rounds++
     }
     resultBox.setAttribute("style", "background-color: rgb(236, 72, 72);");
 }
